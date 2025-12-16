@@ -1,0 +1,12 @@
+project name  : mobile name
+
+  input : 
+  mobile id
+  brand name
+  owner name
+  price 
+
+operation crud
+
+method : in memory
+       :database 
