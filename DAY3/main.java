@@ -14,7 +14,9 @@ public class Main {
             System.out.println("\n ---mobile CRUD MENU---");
             System.out.println("1. ADD new Mobile");
             System.out.println("2. View Mobiles");
-            System.out.println("3.EXIT");
+            System.out.println("3. update");
+            System.out.println("4.delete");
+            System.out.println("5.exit");
             System.out.println("enter the choice");
             choice=din.nextInt();
             switch (choice)
@@ -39,7 +41,34 @@ public class Main {
                 }
                 case 3:
                 {
+                    System.out.println("enter the mobileid to update");
+                    int uid=din.nextInt();
+                    System.out.println("enter the brandname ");
+                    String ubn=din.next();
+                    System.out.println("enter the ownername ");
+                    String uon=din.next();
+                    System.out.println("enter the price ");
+                    double up=din.nextDouble();
+                    mobileService.updateMobile(uid,ubn,uon,up);
                     break;
                 }
+                case 4:
+                {
+                    System.out.println("enter the mobileid to delete");
+                    int did=din.nextInt();
+                    mobileService.deleteMobile(did);
+                    break;
+                }
+                case 5:
+                {
+                    break;
+                }
+
+
+            }
+
+        }
+        while(choice !=5);
+
     }
 }
