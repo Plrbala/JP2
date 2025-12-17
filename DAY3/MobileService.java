@@ -1,6 +1,3 @@
-package edu.mce.it.service;
-
-import edu.mce.it.model.Mobile;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,12 +11,17 @@ public class MobileService {
                     new Mobile(3,"oppo","aaa",2500.00)
             )
     );
-
     public void getMobiles()
     {
         for(Mobile m:mobiles)
         {
            System.out.println(m);
         }
+    }
+
+    public void addMobile(Mobile mobile)
+    {
+        mobiles.add(mobile);
+        System.out.println("mobile data added successfully");
     }
 }
