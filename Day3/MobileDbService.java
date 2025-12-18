@@ -48,39 +48,57 @@ public class MobileDbService {
             e.printStackTrace();
         }
     }
-    public void getMobiles()
-    {
-        String sql ="SELECT * FROM mobile";
-        try(Connection con= DbUtil.getConnection();
-            Statement st=con.createStatement();
-            ResultSet rs=st.executeQuery(sql))
-        {
+    public void getMobiles() {
+        String sql = "SELECT * FROM mobile";
+        try (Connection con = DbUtil.getConnection();
+             Statement st = con.createStatement();
+             ResultSet rs = st.executeQuery(sql)) {
             System.out.println("\n ID  Brand  Owner  price");
-            while(rs.next())
-            {   System.out.printf("%-10d %-15s %-15s %.2f%n",
-                rs.getInt("mobileid"),
-                rs.getString("brandname"),
-                rs.getString("ownername"),
-                rs.getDouble("price"));
+            while (rs.next()) {
+                System.out.printf("%-10d %-15s %-15s %.2f%n",
+                        rs.getInt("mobileid"),
+                        rs.getString("brandname"),
+                        rs.getString("ownername"),
+                        rs.getDouble("price"));
             }
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    public void updateMobile
+            (int mobileid,String brandname,
+             String ownername,double price)
+    {
+        String sql="UPDATE mobile SET brandname=?,ownername=?,price =? where mobileid=?" ;
+        try(Connection con= DbUtil.getConnection();
+            PreparedStatement ps=con.prepareStatement(sql))
+        {
+            ps.setString(1,brandname);
+            ps.setString(2,ownername);
+            ps.setDouble(3,price);
+            ps.setInt(4,mobileid);
+            int r=ps.executeUpdate();
+            System.out.println(r>0 ? "mobile update":"Mobile not found");
         }
         catch(Exception e)
         {
             e.printStackTrace();
         }
-
     }
-
-
-
-
-
-
-
-
-
-
-
-
+public void deleteMobile(int mobileid)
+{
+    String sql="DELETE FROM mobile where mobileid=? ";
+    try(Connection con= DbUtil.getConnection();
+        PreparedStatement ps=con.prepareStatement(sql))
+    {
+        ps.setInt(1,mobileid);
+        int r=ps.executeUpdate();
+        System.out.println(r>0?"mobile deleted":"Not Found");
+    }
+    catch(Exception e)
+    {
+        e.printStackTrace();
+    }
+}
 }
